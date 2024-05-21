@@ -295,4 +295,36 @@ const getRandomPlane = (dataStorage) => {
     return randomPlane;
 }
 
-console.log(getRandomPlane(dataStorage));
+const getRandomDepartureAirport = (dataStorage) => {
+    return  dataStorage.airportICAO[Math.floor(Math.random() * dataStorage.airportICAO.length)];
+}
+
+const getRandomArrivalAirport = (dataStorage) => {
+    return  dataStorage.airportICAO[Math.floor(Math.random() * dataStorage.airportICAO.length)];
+}
+
+const getRandomAirports = dataStorage => {
+    const departureAirport = getRandomDepartureAirport(dataStorage);
+    let arrivalAirport = getRandomArrivalAirport(dataStorage);
+    while (departureAirport === arrivalAirport) {
+        arrivalAirport = getRandomArrivalAirport(dataStorage);
+    }
+    return {departureAirport, arrivalAirport};
+}
+
+const getRoute = (dataStorage, departureAirport, arrivalAirport) => {
+    const routeKey = `${departureAirport.toLowerCase()}_${arrivalAirport.toLowerCase()}`;
+    const route = dataStorage.routes[routeKey];
+    return route ? route.join(' ') : 'No route found';
+}
+
+const generateFlightPlan = (dataStorage) => {
+    const getAirplane = getRandomPlane(dataStorage);
+    const airports = getRandomAirports(dataStorage);
+    const departureAirport = airports.departureAirport
+    const arrivalAirport = airports.arrivalAirport;
+    const route = getRoute(dataStorage, departureAirport, arrivalAirport);
+    return console.log(`Plane to use: ${getAirplane}, Route: ${departureAirport} ${route} ${arrivalAirport}`);
+}
+
+generateFlightPlan(dataStorage);
