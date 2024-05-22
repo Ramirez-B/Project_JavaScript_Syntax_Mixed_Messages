@@ -1,6 +1,6 @@
 # Project JavaScript Syntax: Mixed Messages
 
-This project is part of the Career Path of Full-Stack Engineer made by Codecademy,
+This project is part of the Career Path of Full-Stack Engineer made by Codecademy.
 
 
 ## The project's objectives are:
